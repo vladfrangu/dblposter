@@ -1,7 +1,7 @@
 const request = require("snekfetch");
 const API_URL = `https://discordbots.org/api/bots/{id}/stats`;
 
-module.exports = (client, token, DISCORDIE) => {
+module.exports = (client, token, DISCORDIE, paramName) => {
 	if (DISCORDIE) {
 		let totalGuilds = client.Guilds.size;
 		let shardID = 0, shardCount = 1;
@@ -10,7 +10,7 @@ module.exports = (client, token, DISCORDIE) => {
 			shardCount = client.options.shardCount || 1;
 		}
 		let id = client.User.id;
-		postData(shardID, shardCount, totalGuilds, token, client, id);
+		postData(shardID, shardCount, totalGuilds, token, client, id, paramName);
 	} else {
 		let totalGuilds = null;
 		let shardID = 0, shardCount = 1;
@@ -36,18 +36,18 @@ module.exports = (client, token, DISCORDIE) => {
 			}
 		}
 		totalGuilds = client.servers ? Object.keys(client.servers).length : client.guilds.size;
-		postData(shardID, shardCount, totalGuilds, token, client, client.id ? client.id : client.user.id);
+		postData(shardID, shardCount, totalGuilds, token, client, client.id ? client.id : client.user.id, paramName);
 	}
 };
 
-function postData (shardID, shardCount, guilds, token, client, id) {
+function postData (shardID, shardCount, guilds, token, client, id, paramName) {
 	if (shardID === null && shardCount === null) {
 		request.post(API_URL.replace("{id}", id)).set("Authorization", token).send({ server_count: Number(guilds) })
-			.then(() => client.dblPoster.emit("posted"))
-			.catch(e => client.dblPoster.emit("error", e));
+			.then(() => { client[paramName].emit("posted"); })
+			.catch(e => { client[paramName].emit("error", e); });
 	} else {
 		request.post(API_URL.replace("{id}", id)).set("Authorization", token).send({ server_count: Number(guilds), shard_id: Number(shardID), shard_count: Number(shardCount) })
-			.then(() => client.dblPoster.emit("posted"))
-			.catch(e => client.dblPoster.emit("error", e));
+			.then(() => { client[paramName].emit("posted"); })
+			.catch(e => { client[paramName].emit("error", e); });
 	}
 }

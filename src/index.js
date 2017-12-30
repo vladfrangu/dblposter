@@ -15,7 +15,7 @@ class DBLPoster extends EventEmitter {
 			value: this,
 			writable: false,
 		});
-		return bind(client, this.apiKey);
+		return bind(client, this.apiKey, paramName);
 	}
 }
 
