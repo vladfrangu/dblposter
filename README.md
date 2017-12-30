@@ -1,3 +1,15 @@
+<div>
+	<br />
+	<p>
+		<a href="https://www.npmjs.com/package/dblposter"><img src="https://img.shields.io/npm/v/dblposter.svg?maxAge=3600" alt="NPM version" /></a>
+		<a href="https://www.npmjs.com/package/dblposter"><img src="https://img.shields.io/npm/dt/dblposter.svg?maxAge=3600" alt="NPM downloads" /></a>
+		<a href="https://david-dm.org/KingDGrizzle/dblposter"><img src="https://img.shields.io/david/KingDGrizzle/dblposter.svg?maxAge=3600" alt="Dependencies" /></a>
+	</p>
+	<p>
+    		<a href="https://nodei.co/npm/dblposter/"><img src="https://nodei.co/npm/dblposter.png?downloads=true&stars=true" alt="NPM info"></a>
+  	</p>
+</div>
+
 # DBLPoster
 A simple to use poster for DiscordBotList stats.
 
