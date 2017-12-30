@@ -1,0 +1,12 @@
+{
+  "name": "DBLPoster",
+  "version": "1.0.0",
+  "description": "A simple to use poster for DiscordBotList",
+  "main": "src/index.js",
+  "repository": "https://github.com/KingDGrizzle/dblposter",
+  "author": "Frangu Vlad <kingdgrizzle@gmail.com>",
+  "license": "GNU-3",
+  "dependencies": {
+    "snekfetch": "^3.6.1"
+  }
+}

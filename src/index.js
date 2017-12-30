@@ -1,0 +1,22 @@
+const bind = require("./Bind");
+const { EventEmitter } = require("events");
+
+class DBLPoster extends EventEmitter {
+	constructor (apiKey) {
+		super();
+		this.apiKey = apiKey;
+	}
+
+	bind (client, paramName = "dblPoster") {
+		if (this.apiKey === "" || this.apiKey === null || !this.apiKey || typeof this.apiKey !== "string") {
+			throw new Error(`The API key is either not specified, or is not a string.`);
+		}
+		Object.defineProperty(client, paramName, {
+			value: this,
+			writable: false,
+		});
+		return bind(client, this.apiKey);
+	}
+}
+
+module.exports = DBLPoster;
