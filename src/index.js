@@ -4,7 +4,11 @@ const { EventEmitter } = require("events");
 class DBLPoster extends EventEmitter {
 	constructor (apiKey) {
 		super();
-		this.apiKey = apiKey;
+		Object.defineProperty(this, "apiKey", {
+			value: apiKey,
+			writable: false,
+			enumerable: false,
+		});
 	}
 
 	bind (client, paramName = "dblPoster") {
