@@ -1,5 +1,5 @@
 {
-  "name": "dblPoster",
+  "name": "dblposter",
   "version": "1.0.0",
   "description": "A simple to use poster for DiscordBotList",
   "main": "src/index.js",
