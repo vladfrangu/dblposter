@@ -15,6 +15,7 @@ class DBLPoster extends EventEmitter {
 		if (this.apiKey === "" || this.apiKey === null || !this.apiKey || typeof this.apiKey !== "string") {
 			throw new Error(`The API key is either not specified, or is not a string.`);
 		}
+		if (!client) throw new RangeError(`You need to provide a client to bind to!`);
 		Object.defineProperty(client, paramName, {
 			value: this,
 			writable: false,
