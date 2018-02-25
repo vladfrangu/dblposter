@@ -18,10 +18,11 @@ A simple to use poster for DiscordBotList stats.
 ```js
 const dbl = require("dblposter");
 
-const dblPoster = new dbl(`API KEY GOES HERE`);
-
 // Then, whatever your client is (Discordie, Discord.JS, Eris or Discord.io)
-dblPoster.bind(client);
+const dblPoster = new dbl(`API KEY GOES HERE`, client);
+
+// Then somewhere in your code, like in READY
+dblPoster.bind();
 ```
 
 That will bind the poster to your client automatically and handle the stat posting on ready, guild create or delete.
@@ -37,5 +38,7 @@ That function also adds the poster to the client, with the default name of `dblP
 
 If for any reason you want to change the name of the newly added property, it's as easy as:
 ```js
-dblPoster.bind(client, "mySpecialVariableName");
+dblPoster.bind("mySpecialVariableName");
 ```
+
+Then, access it with `client.mySpecialVariableName`
