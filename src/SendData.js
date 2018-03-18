@@ -14,6 +14,7 @@ module.exports = (client, token, DISCORDIE, paramName) => {
 		let totalGuilds = null;
 		let shardID = 0, shardCount = 1;
 		let DIO = false;
+		let ERIS = false;
 		if (client._shard) {
 			DIO = true;
 			shardID = client._shard[0];
@@ -22,10 +23,12 @@ module.exports = (client, token, DISCORDIE, paramName) => {
 		if (!DIO) {
 			if (client.shards && client.shards.size) {
 				// This is dirty, but w/e
-				// TODO:
-				// Figure out if we can get the current shard ID only (If Eris is instantiated using new Eris({lastShardID}))
-				shardID = null;
-				shardCount = null;
+				if (client.options.firstShardID === client.options.lastShardID) {
+					shardID = client.options.firstShardID;
+				} else {
+					ERIS = true;
+				}
+				shardCount = client.options.maxShards;
 			} else if (client.shard) {
 				shardID = client.shard.id;
 				shardCount = client.shard.count;
@@ -35,7 +38,13 @@ module.exports = (client, token, DISCORDIE, paramName) => {
 			}
 		}
 		totalGuilds = client.servers ? Object.keys(client.servers).length : client.guilds.size;
-		postData(shardID, shardCount, totalGuilds, token, client, false, paramName);
+		if (!ERIS) postData(shardID, shardCount, totalGuilds, token, client, false, paramName);
+		else {
+			client.shards.forEach(s => {
+				const totalGuilds = client.guilds.filter(g => g.shard.id === s.id).length; // Thank Vlag for block-scoped variables
+				postData(s.id, shardCount, totalGuilds, token, client, false, paramName);
+			});
+		}
 	}
 };
 
