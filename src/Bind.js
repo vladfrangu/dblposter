@@ -2,15 +2,16 @@ const sendData = require("./SendData");
 
 let DISCORDIE = false;
 
-module.exports = (client, apiKey, paramName) => {
+module.exports = (client, paramName) => {
 	if (client.Dispatcher) DISCORDIE = true;
+	sendData.send(client, paramName, DISCORDIE);
 	const interval = setInterval(() => {
-		sendData(client, apiKey, DISCORDIE, paramName);
-	}, 120000);
+		sendData.send(client, paramName, DISCORDIE);
+	}, 1800000);
 	interval.unref();
 	Object.defineProperty(client[paramName], "_interval", {
 		value: interval,
-		writable: false,
+		writable: true,
 		enumerable: false,
 	});
 };

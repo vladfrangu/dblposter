@@ -15,7 +15,7 @@ class DBLPoster extends EventEmitter {
 	 */
 	constructor (apiKey, client) {
 		super();
-		Object.defineProperty(this, "apiKey", {
+		Object.defineProperty(this, "_apiKey", {
 			value: apiKey,
 			enumerable: false,
 		});
@@ -26,18 +26,20 @@ class DBLPoster extends EventEmitter {
 	 * Binds the poster to the client.
 	 * @param {string} [paramName="dblPoster"] The value that determines the accessible
 	 * poster instance on the client
-	 * @returns {void}
+	 * @param {DiscordJS.Client|Eris|DiscordIO.Client|DiscordIE.Client} [client] Optional client to bind to,
+	 * if you haven't added it in the constructor
 	 * @memberof DBLPoster
 	 * @chainable
 	 */
-	bind (paramName = "dblPoster") {
-		if (this.apiKey === "" || this.apiKey === null || !this.apiKey || typeof this.apiKey !== "string") {
+	bind (paramName = "dblPoster", client = this.client) {
+		if (this._apiKey === "" || this._apiKey === null || !this._apiKey || typeof this._apiKey !== "string") {
 			throw new Error(`The API key is either not specified, or is not a string.`);
 		}
-		if (!this.client) throw new RangeError(`You need to provide a client to bind to!`);
+		if (!client) throw new RangeError(`You need to provide a client to bind to, either in the constructor of dblposter or in the bind function!`);
+		this.client = client;
 		this.paramName = paramName;
 		this.client[this.paramName] = this;
-		bind(this.client, this.apiKey, paramName);
+		bind(this.client, paramName);
 		return this;
 	}
 
@@ -58,6 +60,16 @@ class DBLPoster extends EventEmitter {
 			this.paramName = null;
 		}
 		return this;
+	}
+
+	/**
+	 * Runs a manual post of the current bot stats.
+	 * @memberof DBLPoster
+	 * @returns {void}
+	 */
+	post () {
+		const paramName = this.paramName;
+		this.destroy().bind(paramName);
 	}
 }
 
