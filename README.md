@@ -47,6 +47,7 @@ poster.bind();
 Ok, if you've reached this point, you're probably curios about exactly what this library can do.
 
 First, let's talk about the `bind` function above. It takes two parameters:
+
 | Parameter Name |                           Type                          | Default     | Description                                                                          |
 |:--------------:|:-------------------------------------------------------:|-------------|--------------------------------------------------------------------------------------|
 |    paramName   |                          String                         | dblPoster   | The property which will get attached to the client in order to handle timers.        |
