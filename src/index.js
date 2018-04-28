@@ -26,7 +26,7 @@ class DBLPoster extends EventEmitter {
 	 * Binds the poster to the client.
 	 * @param {string} [paramName="dblPoster"] The value that determines the accessible
 	 * poster instance on the client
-	 * @param {DiscordJS.Client|Eris|DiscordIO.Client|DiscordIE.Client} [client] Optional client to bind to,
+	 * @param {DiscordJS.Client|Eris|DiscordIO.Client|DiscordIE.Client} [client=this.client] Optional client to bind to,
 	 * if you haven't added it in the constructor
 	 * @memberof DBLPoster
 	 * @chainable
