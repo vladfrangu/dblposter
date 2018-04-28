@@ -1,9 +1,12 @@
 const sendData = require("./SendData");
 
 let DISCORDIE = false;
+let ALREADY_READY = false;
 
 module.exports = (client, paramName) => {
-	if (client.Dispatcher) {
+	if (ALREADY_READY) {
+		onReady(client, paramName);
+	} else if (client.Dispatcher) {
 		DISCORDIE = true;
 		client.Dispatcher.once("GATEWAY_READY", () => onReady(client, paramName));
 	} else {
@@ -12,6 +15,7 @@ module.exports = (client, paramName) => {
 };
 
 function onReady (client, paramName) {
+	ALREADY_READY = true;
 	sendData.send(client, paramName, DISCORDIE);
 	const interval = setInterval(() => {
 		sendData.send(client, paramName, DISCORDIE);
