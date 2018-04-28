@@ -77,7 +77,7 @@ And in the end, dblposter extends EventEmitter, and has 2 possible events:
 | Event Name |   Event Params  | Description                                                                                                                                                                                        |
 |:----------:|:---------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |   posted   |                 | The post was successfully done. Use this event if you want to log that the post was successful.                                                                                                    |
-|    error   | Snekfetch.error | The post couldn't finish. The returned property from the event is a [Snekfetch Response Object](https://snekfetch.js.org/?api=snekfetch#Snekfetch.SnekfetchResponse) containing more informations. |
+|    error   | Snekfetch.Response | The post couldn't finish. The returned property from the event is a [Snekfetch Response Object](https://snekfetch.js.org/?api=snekfetch#Snekfetch.SnekfetchResponse) containing more informations. |
 
 To access it, it's as easy as:
 ```js
