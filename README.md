@@ -44,7 +44,7 @@ poster.bind();
 
 ## In-Depth Details
 
-Ok, if you've reached this point, you're probably curios about exactly what this library can do.
+Ok, if you've reached this point, you're probably curious about exactly what this library can do.
 
 First, let's talk about the `bind` function above. It takes two parameters:
 
