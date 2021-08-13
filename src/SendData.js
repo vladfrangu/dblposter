@@ -110,6 +110,6 @@ class SendData {
 	}
 }
 
-SendData.API_URL = "https://discordbots.org/api/bots/{id}/stats";
+SendData.API_URL = "https://top.gg/api/bots/{id}/stats";
 
 module.exports = SendData;
